@@ -137,10 +137,15 @@
 //   b: { c: d },
 // } = obj; // d is re-assignable
 
-function sum(sumObj) {
-  console.log(sumObj);
-  const { a, b } = sumObj;
-  return a + b;
-}
-result = sum({ a: 1, b: 2 });
-console.log(result);
+// function sum(sumObj) {
+//   console.log(sumObj);
+//   const { a, b } = sumObj;
+//   return a + b;
+// }
+// result = sum({ a: 1, b: 2 });
+// console.log(result);
+
+const numbers = [];
+const obj = { a: 1, b: 2 };
+({ a: numbers[0], b: numbers[1] } = obj);
+console.log(numbers);
