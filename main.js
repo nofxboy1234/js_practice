@@ -363,6 +363,18 @@ function createUser(name) {
 
   return { name, discordName, getReputation, giveReputation };
 }
+function createPlayer(name, level) {
+  const { discordName, getReputation } = createUser(name);
+
+  const increaseLevel = () => level++;
+  return { name, discordName, getReputation, increaseLevel };
+}
+function createPlayer2(name, level) {
+  const user = createUser(name);
+
+  const increaseLevel = () => level++;
+  return Object.assign({}, user, { increaseLevel });
+}
 const josh = createUser('josh');
 josh.giveReputation();
 josh.giveReputation();
@@ -370,3 +382,5 @@ console.log({
   discordName: josh.discordName,
   reputation: josh.getReputation(),
 });
+const player = createPlayer('dylan', 19);
+// const player2 = createPlayer2('zoey', 999);
