@@ -145,7 +145,132 @@
 // result = sum({ a: 1, b: 2 });
 // console.log(result);
 
-const numbers = [];
-const obj = { a: 1, b: 2 };
-({ a: numbers[0], b: numbers[1] } = obj);
-console.log(numbers);
+// const numbers = [];
+// const obj = { a: 1, b: 2 };
+// ({ a: numbers[0], b: numbers[1] } = obj);
+// console.log(numbers);
+
+// const [a = 1] = []; // a is 1
+// const { b = 2 } = { b: undefined }; // b is 2
+// const { c = 2 } = { c: null }; // c is null
+
+// const { b = console.log("hey") } = { b: 2 };
+// // Does not log anything, because `b` is defined and there's no need
+// // to evaluate the default value.
+
+// const { a, ...others } = { a: 1, b: 2, c: 3 };
+// console.log(others);
+
+// let a = 1;
+// let b = 3;
+// [a, b] = [b, a];
+// const arr = [1, 2, 3];
+// [arr[2], arr[1]] = [arr[1], arr[2]];
+
+// function f() {
+//   return [1, 2, 3];
+// }
+// const [a, , b] = f();
+// console.log(a);
+// console.log(b);
+// const [c] = f();
+
+// const obj = { a: 1, b: { c: 2 } };
+// const {
+//   a,
+//   b: { c: d },
+// } = obj;
+// // Two variables are bound: `a` and `d`
+
+// const numbers = [];
+// const obj = { a: 1, b: 2 };
+// ({ a: numbers[0], b: numbers[1] } = obj);
+// // The properties `a` and `b` are assigned to properties of `numbers`
+
+// const [a, b, ...{ length }] = [1, 2, 3];
+// const [x, y, ...{ length }] = [1, 2, 3, 4];
+
+// const [a, b, ...[c, d, ...[e, f]]] = [1, 2, 3, 4, 5, 6];
+
+// const { a, ...b } = {a : 1, b: 2};
+// const {
+//   a,
+//   b: { c: d },
+// } = { a: 1, b: { c: 2 } };
+
+// function parseProtocol(url) {
+//   const parsedURL = /^(\w+):\/\/([^/]+)\/(.*)$/.exec(url);
+//   if (!parsedURL) {
+//     return false;
+//   }
+//   console.log(parsedURL);
+//   const [, protocol, fullhost, fullpath] = parsedURL;
+//   return protocol;
+// }
+// parseProtocol('https://developer.mozilla.org/en-US/docs/Web/JavaScript');
+
+// const [a, b] = new Map([
+//   [1, 2],
+//   [3, 4],
+// ]);
+
+// const obj = {
+//   *[Symbol.iterator]() {
+//     for (const v of [0, 1, 2, 3]) {
+//       console.log(v);
+//       yield v;
+//     }
+//   },
+// };
+// const [a, b] = obj;
+
+// const obj = {
+//   *[Symbol.iterator]() {
+//     for (const v of [0, 1, 2, 3]) {
+//       console.log(v);
+//       yield v;
+//     }
+//   },
+// };
+// const [a, b, ...rest] = obj; // Logs 0 1 2 3
+// console.log(rest); // [2, 3] (an array)
+
+// const o = { p: 42, q: true };
+// const { p: foo, q: bar } = o;
+
+// const { a: aa = 10, b: bb = 5 } = { a: 3 };
+
+// const user = {
+//   id: 42,
+//   displayName: 'jdoe',
+//   fullName: {
+//     firstName: 'Jane',
+//     lastName: 'Doe',
+//   },
+// };
+// function userId({ id }) {
+//   return id;
+// }
+// const result = userId(user);
+// function userDisplayName({ displayName: dname }) {
+//   return dname;
+// }
+// const result2 = userDisplayName(user);
+// function whois({ displayName, fullName: { firstName: name } }) {
+//   return `${displayName} is ${name}`;
+// }
+// const result3 = whois(user);
+
+function drawChart({
+  size = 'big',
+  coords = { x: 0, y: 0 },
+  radius = 25,
+} = {}) {
+  console.log(size, coords, radius);
+  // do some chart drawing
+}
+// drawChart({
+//   coords: { x: 18, y: 30 },
+//   radius: 30,
+// });
+drawChart();
