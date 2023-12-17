@@ -261,16 +261,101 @@
 // }
 // const result3 = whois(user);
 
-function drawChart({
-  size = 'big',
-  coords = { x: 0, y: 0 },
-  radius = 25,
-} = {}) {
-  console.log(size, coords, radius);
-  // do some chart drawing
-}
+// function drawChart({
+//   size = 'big',
+//   coords = { x: 0, y: 0 },
+//   radius = 25,
+// } = {}) {
+//   console.log(size, coords, radius);
+//   // do some chart drawing
+// }
 // drawChart({
 //   coords: { x: 18, y: 30 },
 //   radius: 30,
 // });
-drawChart();
+// drawChart();
+
+// const metadata = {
+//   title: 'Scratchpad',
+//   translations: [
+//     {
+//       locale: 'de',
+//       localizationTags: [],
+//       lastEdit: '2014-04-14T08:43:37',
+//       url: '/de/docs/Tools/Scratchpad',
+//       title: 'JavaScript-Umgebung',
+//     },
+//   ],
+//   url: '/en-US/docs/Tools/Scratchpad',
+// };
+// const {
+//   title: englishTitle, // rename
+//   translations: [
+//     {
+//       title: localeTitle, // rename
+//     },
+//   ],
+// } = metadata;
+
+// const people = [
+//   {
+//     name: 'Mike Smith',
+//     family: {
+//       mother: 'Jane Smith',
+//       father: 'Harry Smith',
+//       sister: 'Samantha Smith',
+//     },
+//     age: 35,
+//   },
+//   {
+//     name: 'Tom Jones',
+//     family: {
+//       mother: 'Norah Jones',
+//       father: 'Richard Jones',
+//       brother: 'Howard Jones',
+//     },
+//     age: 25,
+//   },
+// ];
+// for (const {
+//   name: n,
+//   family: { father: f },
+// } of people) {
+//   console.log(`Name: ${n}, Father: ${f}`);
+// }
+// // "Name: Mike Smith, Father: Harry Smith"
+// // "Name: Tom Jones, Father: Richard Jones"
+
+// const key = "z";
+// const { [key]: foo } = { z: "bar" };
+// console.log(foo); // "bar"
+
+// const foo = { "fizz-buzz": true };
+// const { "fizz-buzz": fizzBuzz } = foo;
+
+// const { a, toFixed } = 1;
+// console.log(a, toFixed);
+
+// const props = [
+//   { id: 1, name: 'Fizz' },
+//   { id: 2, name: 'Buzz' },
+//   { id: 3, name: 'FizzBuzz' },
+// ];
+// const [, , { name }] = props;
+// console.log(name);
+
+// const obj = {
+//   self: '123',
+//   __proto__: {
+//     prot: '456',
+//   },
+// };
+// const { self, prot } = obj;
+// console.log(self); // "123"
+// console.log(prot); // "456"
+
+function createUser(name) {
+  const discordName = '@' + name;
+  return { name, discordName };
+}
+
