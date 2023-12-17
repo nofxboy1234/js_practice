@@ -354,33 +354,44 @@
 // console.log(self); // "123"
 // console.log(prot); // "456"
 
-function createUser(name) {
-  const discordName = '@' + name;
+// function createUser(name) {
+//   const discordName = '@' + name;
 
-  let reputation = 0;
-  const getReputation = () => reputation;
-  const giveReputation = () => reputation++;
+//   let reputation = 0;
+//   const getReputation = () => reputation;
+//   const giveReputation = () => reputation++;
 
-  return { name, discordName, getReputation, giveReputation };
-}
-function createPlayer(name, level) {
-  const { discordName, getReputation } = createUser(name);
+//   return { name, discordName, getReputation, giveReputation };
+// }
+// function createPlayer(name, level) {
+//   const { discordName, getReputation } = createUser(name);
 
-  const increaseLevel = () => level++;
-  return { name, discordName, getReputation, increaseLevel };
-}
-function createPlayer2(name, level) {
-  const user = createUser(name);
+//   const increaseLevel = () => level++;
+//   return { name, discordName, getReputation, increaseLevel };
+// }
+// function createPlayer2(name, level) {
+//   const user = createUser(name);
 
-  const increaseLevel = () => level++;
-  return Object.assign({}, user, { increaseLevel });
-}
-const josh = createUser('josh');
-josh.giveReputation();
-josh.giveReputation();
-console.log({
-  discordName: josh.discordName,
-  reputation: josh.getReputation(),
-});
-const player = createPlayer('dylan', 19);
-// const player2 = createPlayer2('zoey', 999);
+//   const increaseLevel = () => level++;
+//   return Object.assign({}, user, { increaseLevel });
+// }
+// const josh = createUser('josh');
+// josh.giveReputation();
+// josh.giveReputation();
+// console.log({
+//   discordName: josh.discordName,
+//   reputation: josh.getReputation(),
+// });
+// const player = createPlayer('dylan', 19);
+// // const player2 = createPlayer2('zoey', 999);
+
+const calculator = (function () {
+  const add = (a, b) => a + b;
+  const sub = (a, b) => a - b;
+  const mul = (a, b) => a * b;
+  const div = (a, b) => a / b;
+  return { add, sub, mul, div };
+})();
+const result1 = calculator.add(3, 5);
+const result2 = calculator.sub(6, 2);
+const result3 = calculator.mul(14, 5534);
