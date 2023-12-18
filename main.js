@@ -924,6 +924,10 @@ class Rabbit extends Animal {
   hide() {
     console.log(`${this.name} hides!`);
   }
+  stop() {
+    super.stop();
+    this.hide();
+  }
 }
 // let animal = new Animal('My animal');
 let rabbit = new Rabbit('White Rabbit');
