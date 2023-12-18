@@ -631,3 +631,40 @@
 //     console.log('Play: ' + music);
 //   }
 // };
+
+function MyObject(data) {
+  this.data = data;
+}
+MyObject.prototype = {
+  getData: function () {
+    return this.data;
+  },
+};
+var constructorObject = new MyObject('data');
+
+class MyClass {
+  constructor(data) {
+    this.data = data;
+  }
+  getData() {
+    return this.data;
+  }
+}
+var constructorObject = new MyClass('data');
+
+anotherObject = {
+  getData: function () {
+    return this.data;
+  },
+};
+function myObject(data) {
+  // const getData = () => {
+  //   return data
+  // }
+  // return { data, getData }
+
+  var obj = Object.create(anotherObject);
+  obj.data = data;
+  return obj;
+}
+var factoryObject = myObject('data');
