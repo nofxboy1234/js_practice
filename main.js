@@ -487,7 +487,7 @@ MyObject.prototype = {
     return this.data;
   },
 };
-var o = new MyObject('data');
+var constructorObject = new MyObject('data');
 
 function myObject(data) {
   var obj = Object.create(myObject.proto);
@@ -499,4 +499,4 @@ myObject.proto = {
     return this.data;
   },
 };
-var o = myObject('data');
+var factoryObject = myObject('data');
