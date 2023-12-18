@@ -632,39 +632,298 @@
 //   }
 // };
 
-function MyObject(data) {
-  this.data = data;
-}
-MyObject.prototype = {
-  getData: function () {
-    return this.data;
-  },
-};
-var constructorObject = new MyObject('data');
+// ************************************
+// function MyObject(data) {
+//   this.data = data;
+// }
+// MyObject.prototype = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// var constructorObject = new MyObject('data');
 
-class MyClass {
-  constructor(data) {
-    this.data = data;
+// class MyClass {
+//   constructor(data) {
+//     this.data = data;
+//   }
+//   getData() {
+//     return this.data;
+//   }
+// }
+// var constructorObject = new MyClass('data');
+
+// anotherObject = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// function myObject(data) {
+//   // const getData = () => {
+//   //   return data
+//   // }
+//   // return { data, getData }
+
+//   var obj = Object.create(anotherObject);
+//   obj.data = data;
+//   return obj;
+// }
+// var factoryObject = myObject('data');
+// ************************************
+
+// let obj = {
+//   get propName() {},
+//   set propName(value) {},
+// };
+
+// 'use strict';
+// let user = {
+//   name: 'John',
+//   surname: 'Smith',
+//   get fullName() {
+//     return `${this.name} ${this.surname}`;
+//   },
+//   set fullName(value) {
+//     [this.name, this.surname] = value.split(' ');
+//   },
+// };
+
+// let user = {
+//   name: 'John',
+//   surname: 'Smith',
+// };
+// Object.defineProperty(user, 'fullName', {
+//   get() {
+//     return `${this.name} ${this.surname}`;
+//   },
+//   set(value) {
+//     [this.name, this.surname] = value.split(' ');
+//   },
+// });
+
+// let user = {
+//   get name() {
+//     return this._name;
+//   },
+
+//   set name(value) {
+//     if (value.length < 4) {
+//       console.log("Name is too short, need at least 4 characters");
+//       return;
+//     }
+//     this._name = value;
+//   }
+// };
+// user.name = "Pete";
+// user.name = ""; // Name is too short...
+
+// class MyClass {
+//   // class methods
+//   constructor() {}
+//   method1() {}
+// }
+
+// class User {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   sayHi() {
+//     console.log(this.name);
+//   }
+// }
+// let user = new User('John');
+
+// class User {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   sayHi() {
+//     console.log(this.name);
+//   }
+// }
+// // class is a function
+// console.log(typeof User); // function
+// // ...or, more precisely, the constructor method
+// console.log(User === User.prototype.constructor); // true
+// // The methods are in User.prototype, e.g:
+// console.log(User.prototype.sayHi); // the code of the sayHi method
+// // there are exactly two methods in the prototype
+// console.log(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
+
+// rewriting class User in pure functions
+
+// // 1. Create constructor function
+// function User(name) {
+//   this.name = name;
+// }
+// // a function prototype has "constructor" property by default,
+// // so we don't need to create it
+// // 2. Add the method to prototype
+// User.prototype.sayHi = function () {
+//   console.log(this.name);
+// };
+// // Usage:
+// let user = new User('John');
+// user.sayHi();
+
+// class User {
+//   constructor() {}
+// }
+// console.log(typeof User); // function
+// User(); // Error: Class constructor User cannot be invoked without 'new'
+
+// let User = class {
+//   sayHi() {
+//     console.log('Hello');
+//   }
+// };
+
+// let User = class MyClass {
+//   sayHi() {
+//     console.log(MyClass);
+//   }
+// };
+// new User().sayHi();
+// console.log(MyClass)
+
+// function makeClass(phrase) {
+//   // declare a class and return it
+//   return class {
+//     sayHi() {
+//       console.log(phrase);
+//     }
+//   };
+// }
+// // Create a new class
+// let User = makeClass("Hello");
+// new User().sayHi(); // Hello
+
+// class User {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   get name() {
+//     return this._name;
+//   }
+
+//   set name(value) {
+//     if (value.length < 4) {
+//       console.log('Name is too short.');
+//       return;
+//     }
+//     this._name = value;
+//   }
+// }
+// let user = new User('John');
+// console.log(user.name);
+// user = new User('');
+
+// class User {
+//   ['say' + 'Hi']() {
+//     console.log('Hello');
+//   }
+// }
+// new User().sayHi();
+
+// class User {
+//   name = "John";
+
+//   sayHi() {
+//     console.log(`Hello, ${this.name}!`);
+//   }
+// }
+// new User().sayHi(); // Hello, John!
+
+// class User {
+//   name = "John";
+// }
+// let user = new User();
+// console.log(user.name); // John
+// console.log(User.prototype.name); // undefined
+
+// class User {
+//   name = prompt('Name, please?', 'John');
+// }
+// let user = new User();
+// alert(user.name); // John
+
+// class Button {
+//   constructor(value) {
+//     this.value = value;
+//   }
+
+//   click() {
+//     console.log(this.value);
+//   }
+// }
+// let button = new Button('hello');
+// setTimeout(button.click, 1000); // undefined
+
+// class Button {
+//   constructor(value) {
+//     this.value = value;
+//   }
+//   click = () => {
+//     console.log(this.value);
+//   };
+// }
+// let button = new Button('hello');
+// setTimeout(button.click, 1000); // hello
+
+// class DateFormatter extends Date {
+//   getFormattedDate() {
+//     const months = [
+//       'Jan',
+//       'Feb',
+//       'Mar',
+//       'Apr',
+//       'May',
+//       'Jun',
+//       'Jul',
+//       'Aug',
+//       'Sep',
+//       'Oct',
+//       'Nov',
+//       'Dec',
+//     ];
+//     return `${this.getDate()}-${months[this.getMonth()]}-${this.getFullYear()}`;
+//   }
+// }
+// console.log(new DateFormatter('August 19, 1975 23:15:30').getFormattedDate());
+// // Expected output: "19-Aug-1975"
+
+// const calculatorMixin = (Base) =>
+//   class extends Base {
+//     calc() {}
+//   };
+// const randomizerMixin = (Base) =>
+//   class extends Base {
+//     randomize() {}
+//   };
+// class Foo {}
+// class Bar extends calculatorMixin(randomizerMixin(Foo)) {}
+// const bar = new Bar();
+
+class Animal {
+  constructor(name) {
+    this.speed = 0;
+    this.name = name;
   }
-  getData() {
-    return this.data;
+  run(speed) {
+    this.speed = speed;
+    console.log(`${this.name} runs with speed ${this.speed}.`);
+  }
+  stop() {
+    this.speed = 0;
+    console.log(`${this.name} stands still.`);
   }
 }
-var constructorObject = new MyClass('data');
-
-anotherObject = {
-  getData: function () {
-    return this.data;
-  },
-};
-function myObject(data) {
-  // const getData = () => {
-  //   return data
-  // }
-  // return { data, getData }
-
-  var obj = Object.create(anotherObject);
-  obj.data = data;
-  return obj;
+class Rabbit extends Animal {
+  hide() {
+    console.log(`${this.name} hides!`);
+  }
 }
-var factoryObject = myObject('data');
+// let animal = new Animal('My animal');
+let rabbit = new Rabbit('White Rabbit');
