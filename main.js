@@ -489,20 +489,20 @@ MyObject.prototype = {
 };
 var constructorObject = new MyObject('data');
 
+anotherObject = {
+  getData: function () {
+    return this.data;
+  },
+};
 function myObject(data) {
-  const getData = () => {
-    return data
-  }
-  return { data, getData }
+  // const getData = () => {
+  //   return data
+  // }
+  // return { data, getData }
 
-  // var obj = Object.create(myObject.proto);
-  // obj.data = data;
-  // return obj;
+  var obj = Object.create(anotherObject);
+  obj.data = data;
+  return obj;
 }
-// myObject.proto = {
-//   getData: function () {
-//     return this.data;
-//   },
-// };
 var factoryObject = myObject('data');
 
