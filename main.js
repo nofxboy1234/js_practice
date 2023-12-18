@@ -906,35 +906,66 @@
 // class Bar extends calculatorMixin(randomizerMixin(Foo)) {}
 // const bar = new Bar();
 
+// class Animal {
+//   constructor(name) {
+//     this.speed = 0;
+//     this.name = name;
+//   }
+//   run(speed) {
+//     this.speed = speed;
+//     console.log(`${this.name} runs with speed ${this.speed}.`);
+//   }
+//   stop() {
+//     this.speed = 0;
+//     console.log(`${this.name} stands still.`);
+//   }
+// }
+// class Rabbit extends Animal {
+//   constructor(name, earLength) {
+//     super(name);
+//     this.earLength = earLength;
+//   }
+//   hide() {
+//     console.log(`${this.name} hides!`);
+//   }
+//   stop() {
+//     super.stop();
+//     this.hide();
+//   }
+// }
+// // let animal = new Animal('My animal');
+// let rabbit = new Rabbit('White Rabbit', 10);
+// console.log(rabbit.name);
+// console.log(rabbit.earLength);
+// rabbit.hide();
+
+// class Animal {
+//   name = 'animal';
+
+//   constructor() {
+//     // this.name = 'animal';
+//     console.log(this.name); // (*)
+//   }
+// }
+// class Rabbit extends Animal {
+//   name = 'rabbit';
+// }
+// let animal = new Animal(); // animal
+// let rabbit = new Rabbit(); // animal
+
 class Animal {
-  constructor(name) {
-    this.speed = 0;
-    this.name = name;
+  showName() {  // instead of this.name = 'animal'
+    console.log('animal');
   }
-  run(speed) {
-    this.speed = speed;
-    console.log(`${this.name} runs with speed ${this.speed}.`);
-  }
-  stop() {
-    this.speed = 0;
-    console.log(`${this.name} stands still.`);
+
+  constructor() {
+    this.showName(); // instead of console.log(this.name);
   }
 }
 class Rabbit extends Animal {
-  constructor(name, earLength) {
-    super(name);
-    this.earLength = earLength;
-  }
-  hide() {
-    console.log(`${this.name} hides!`);
-  }
-  stop() {
-    super.stop();
-    this.hide();
+  showName() {
+    console.log('rabbit');
   }
 }
-// let animal = new Animal('My animal');
-let rabbit = new Rabbit('White Rabbit', 10);
-console.log(rabbit.name);
-console.log(rabbit.earLength);
-rabbit.hide();
+new Animal(); // animal
+new Rabbit(); // rabbit
