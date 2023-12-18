@@ -479,30 +479,155 @@
 // const isInstanceOfC = c instanceof C;
 // const hasConstructorC = c.constructor === C;
 
-function MyObject(data) {
-  this.data = data;
-}
-MyObject.prototype = {
-  getData: function () {
-    return this.data;
-  },
-};
-var constructorObject = new MyObject('data');
+// function MyObject(data) {
+//   this.data = data;
+// }
+// MyObject.prototype = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// var constructorObject = new MyObject('data');
 
-anotherObject = {
-  getData: function () {
-    return this.data;
-  },
-};
-function myObject(data) {
-  // const getData = () => {
-  //   return data
-  // }
-  // return { data, getData }
+// anotherObject = {
+//   getData: function () {
+//     return this.data;
+//   },
+// };
+// function myObject(data) {
+//   // const getData = () => {
+//   //   return data
+//   // }
+//   // return { data, getData }
 
-  var obj = Object.create(anotherObject);
-  obj.data = data;
-  return obj;
-}
-var factoryObject = myObject('data');
+//   var obj = Object.create(anotherObject);
+//   obj.data = data;
+//   return obj;
+// }
+// var factoryObject = myObject('data');
 
+// const Formatter = (function () {
+//   console.log('Start');
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+// })();
+// Formatter.log('Hello');
+
+// const Formatter = (function () {
+//   let timesRun = 0;
+
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+//   const setTimesRun = () => {
+//     log('Setting times run');
+//     ++timesRun;
+//   };
+
+//   const makeUppercase = (text) => {
+//     log('Making uppercase');
+//     setTimesRun();
+//     return text.toUpperCase();
+//   };
+
+//   return {
+//     makeUppercase,
+//     timesRun,
+//   };
+// })();
+
+// const Formatter = (function () {
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+//   const timesRun = [];
+
+//   const makeUppercase = (text) => {
+//     log('Making uppercase');
+//     timesRun.push(null);
+//     return text.toUpperCase();
+//   };
+
+//   return {
+//     makeUppercase,
+//     timesRun,
+//   };
+// })();
+
+// const Formatter = (function () {
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+
+//   const makeUppercase = (text) => {
+//     log('Making uppercase');
+//     return text.toUpperCase();
+//   };
+
+//   const writeToDOM = (selector, message) => {
+//     document.querySelector(selector).innerHTML = message;
+//   };
+
+//   return {
+//     makeUppercase,
+//     writeToDOM,
+//   };
+// })();
+
+// const Formatter = (function (doc) {
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+
+//   const makeUppercase = (text) => {
+//     log('Making uppercase');
+//     return text.toUpperCase();
+//   };
+
+//   const writeToDOM = (selector, message) => {
+//     if (!!doc && 'querySelector' in doc) {
+//       doc.querySelector(selector).innerHTML = message;
+//     }
+//   };
+
+//   return {
+//     makeUppercase,
+//     writeToDOM,
+//   };
+// })(document);
+
+// const documentMock = (() => ({
+//   querySelector: (selector) => ({
+//     innerHTML: null,
+//   }),
+// }))();
+
+// const Formatter = (function(doc) {
+//   const log = (message) => console.log(`[${Date.now()}] Logger: ${message}`);
+
+//   const makeUppercase = (text) => {
+//     log("Making uppercase");
+//     return text.toUpperCase();
+//   };
+
+//   const writeToDOM = (selector, message) => {
+//     doc.querySelector(selector).innerHTML = message;
+//   }
+
+//   return {
+//     makeUppercase,
+//     writeToDOM,
+//   }
+// })(document || documentMock);
+
+// function funkyFunction(music, isWhiteBoy) {
+//   if (isWhiteBoy) {
+//     console.log('Play: ' + music);
+//   }
+// }
+// funkyFunction('that funky music', true);
+
+// // This example is still an anonymous function even though we used the `function` keyword, as it doesn't have a name.
+// const funkyFunction1 = function (music, isWhiteBoy) {
+//   if (isWhiteBoy) {
+//     console.log('Play: ' + music);
+//   }
+// };
+
+// // This is called an arrow function, we'll get into these soon.
+// const funkyFunction2 = (music, isWhiteBoy) => {
+//   if (isWhiteBoy) {
+//     console.log('Play: ' + music);
+//   }
+// };
