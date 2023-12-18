@@ -385,13 +385,118 @@
 // const player = createPlayer('dylan', 19);
 // // const player2 = createPlayer2('zoey', 999);
 
-const calculator = (function () {
-  const add = (a, b) => a + b;
-  const sub = (a, b) => a - b;
-  const mul = (a, b) => a * b;
-  const div = (a, b) => a / b;
-  return { add, sub, mul, div };
-})();
-const result1 = calculator.add(3, 5);
-const result2 = calculator.sub(6, 2);
-const result3 = calculator.mul(14, 5534);
+// const calculator = (function () {
+//   const add = (a, b) => a + b;
+//   const sub = (a, b) => a - b;
+//   const mul = (a, b) => a * b;
+//   const div = (a, b) => a / b;
+//   return { add, sub, mul, div };
+// })();
+// const result1 = calculator.add(3, 5);
+// const result2 = calculator.sub(6, 2);
+// const result3 = calculator.mul(14, 5534);
+
+// function isCool(name) {
+//   let cool;
+//   if (name === 'wes') {
+//     const cool = true;
+//   }
+//   console.log(cool);
+//   return cool;
+// }
+// isCool('Dylan');
+
+// const dog = 'snickers';
+// function logDog() {
+//   console.log(dog);
+// }
+// function go() {
+//   const dog = 'sunny';
+//   logDog();
+// }
+// go();
+
+// var proto = { protoprop: 'protoprop' };
+// function C() {}
+// C.prototype = proto;
+// var obj = new C();
+// let result = proto.isPrototypeOf(obj);
+
+// var proto = { protoprop: 'protoprop' };
+// var obj = Object.create(proto);
+// let result = proto.isPrototypeOf(obj);
+
+// function C() {
+//   this.instance_member = 'whoops!';
+// }
+// var c = C();
+// const result = instance_member;
+
+// function C() {
+//   if (!(this instanceof C)) {
+//     return new C();
+//   }
+//   this.instance_member = 'This is ok.';
+// }
+// var c = C();
+// // const result = instance_member;
+// const result1 = c instanceof C;
+// const result2 = c.constructor === C;
+
+// // Constructor
+// function C() {}
+// // Create object.
+// var c = new C();
+// let isInstanceOfC = c instanceof C;
+// let hasConstructorC = c.constructor === C;
+// // Change prototype
+// C.prototype = { prototype_prop: 'proto' };
+// hasConstructorC = c.constructor === C;
+// isInstanceOfC = c instanceof C; // instanceof no longer works!
+
+// // Create two constructors with the
+// // same prototype.
+// var proto = { protoprop: 'protoprop' };
+// function C() {
+//   this.cprop = 'cprop';
+// }
+// C.prototype = proto;
+// function F() {
+//   this.fprop = 'fprop';
+// }
+// F.prototype = proto;
+// var f = new F();
+// let result1 = f.protoprop; // Has prototype properties
+// let result2 = f.fprop; // Has F properties
+// let result3 = f.cprop; // Doesn't have C properties
+// let result4 = f instanceof C; // Is an instance of C!?!
+
+// function C() {}
+// C.prototype = { prototype_prop: 'proto' };
+// // Changing the prototype breaks the constructor
+// // property for all objects created after the change.
+// c = new C();
+// const isInstanceOfC = c instanceof C;
+// const hasConstructorC = c.constructor === C;
+
+function MyObject(data) {
+  this.data = data;
+}
+MyObject.prototype = {
+  getData: function () {
+    return this.data;
+  },
+};
+var o = new MyObject('data');
+
+function myObject(data) {
+  var obj = Object.create(myObject.proto);
+  obj.data = data;
+  return obj;
+}
+myObject.proto = {
+  getData: function () {
+    return this.data;
+  },
+};
+var o = myObject('data');
