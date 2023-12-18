@@ -921,6 +921,10 @@ class Animal {
   }
 }
 class Rabbit extends Animal {
+  constructor(name, earLength) {
+    super(name);
+    this.earLength = earLength;
+  }
   hide() {
     console.log(`${this.name} hides!`);
   }
@@ -930,4 +934,7 @@ class Rabbit extends Animal {
   }
 }
 // let animal = new Animal('My animal');
-let rabbit = new Rabbit('White Rabbit');
+let rabbit = new Rabbit('White Rabbit', 10);
+console.log(rabbit.name);
+console.log(rabbit.earLength);
+rabbit.hide();
