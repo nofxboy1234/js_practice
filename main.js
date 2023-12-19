@@ -1298,19 +1298,57 @@
 // console.log('end');
 // coffeeMachine._waterAmount;
 
-class CoffeeMachine {
-  #waterLimit = 200;
+// class CoffeeMachine {
+//   #waterLimit = 200;
 
-  #fixWaterAmount(value) {
-    if (value < 0) return 0;
-    if (value > this.#waterLimit) return this.#waterLimit;
+//   #fixWaterAmount(value) {
+//     if (value < 0) return 0;
+//     if (value > this.#waterLimit) return this.#waterLimit;
+//   }
+
+//   setWaterAmount(value) {
+//     this.#waterLimit = this.#fixWaterAmount(value);
+//   }
+// }
+// let coffeeMachine = new CoffeeMachine();
+// // can't access privates from outside of the class
+// coffeeMachine.#fixWaterAmount(123); // Error
+// coffeeMachine.#waterLimit = 1000; // Error
+
+// class User {
+//   static staticMethod() {
+//     console.log(this === User);
+//   }
+// }
+// User.staticMethod();
+
+// class User {}
+// User.staticMethod = function () {
+//   console.log(this === User);
+// };
+// User.staticMethod(); // true
+
+class Article {
+  constructor(title, date) {
+    this.title = title;
+    this.date = date;
   }
 
-  setWaterAmount(value) {
-    this.#waterLimit = this.#fixWaterAmount(value);
+  bye() {
+    console.log('bye');
+  }
+
+  hello() {
+    this.bye();
+    return Article.createTodays();
+  }
+
+  static createTodays() {
+    // remember, this = Article
+    return new this("Today's digest", new Date());
   }
 }
-let coffeeMachine = new CoffeeMachine();
-// can't access privates from outside of the class
-coffeeMachine.#fixWaterAmount(123); // Error
-coffeeMachine.#waterLimit = 1000; // Error
+const article2 = new Article('a title', 'date');
+let article = Article.createTodays();
+console.log(article.title); // Today's digest
+article.hello();
