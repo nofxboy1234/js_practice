@@ -1027,20 +1027,290 @@
 // let rabbit = new Rabbit('White Rabbit');
 // rabbit.stop();
 
-let animal = {
-  name: 'Animal',
-  eat() {
-    console.log(`${this.name} eats.`);
-  },
-};
+// let animal = {
+//   name: 'Animal',
+//   eat() {
+//     console.log(`${this.name} eats.`);
+//   },
+// };
+// let rabbit = {
+//   __proto__: animal,
+//   name: 'Rabbit',
+//   eat() {
+//     // that's how super.eat() could presumably work
+//     this.__proto__.eat.call(this); // (*)
+//   },
+// };
+// rabbit.eat(); // Rabbit eats.
 
-let rabbit = {
-  __proto__: animal,
-  name: 'Rabbit',
-  eat() {
-    // that's how super.eat() could presumably work
-    this.__proto__.eat.call(this); // (*)
-  },
-};
+// let animal = {
+//   name: 'Animal',
+//   eat() {
+//     console.log(`${this.name} eats.`);
+//   },
+// };
+// let rabbit = {
+//   __proto__: animal,
+//   name: 'rabbit',
+//   eat() {
+//     // ...bounce around rabbit-style and call parent (animal) method
+//     this.__proto__.eat.call(this); // (*)
+//   },
+// };
+// let longEar = {
+//   __proto__: rabbit,
+//   name: 'longEar',
+//   eat() {
+//     // ...do something with long ears and call parent (rabbit) method
+//     this.__proto__.eat.call(this); // (**)
+//   },
+// };
+// longEar.eat(); // Error: Maximum call stack size exceeded
 
-rabbit.eat(); // Rabbit eats.
+// let animal = {
+//   name: 'Animal',
+//   eat() {
+//     // animal.eat.[[HomeObject]] == animal
+//     console.log(`${this.name} eats.`);
+//   },
+// };
+// let rabbit = {
+//   __proto__: animal,
+//   name: 'Rabbit',
+//   eat() {
+//     // rabbit.eat.[[HomeObject]] == rabbit
+//     super.eat();
+//   },
+// };
+// let longEar = {
+//   __proto__: rabbit,
+//   name: 'Long Ear',
+//   eat() {
+//     // longEar.eat.[[HomeObject]] == longEar
+//     super.eat();
+//   },
+// };
+// // works correctly
+// longEar.eat(); // Long Ear eats.
+
+// let animal = {
+//   sayHi() {
+//     console.log(`I'm an animal`);
+//   },
+// };
+// // rabbit inherits from animal
+// let rabbit = {
+//   __proto__: animal,
+//   sayHi() {
+//     super.sayHi();
+//   },
+// };
+// let plant = {
+//   sayHi() {
+//     console.log("I'm a plant");
+//   },
+// };
+// // tree inherits from plant
+// let tree = {
+//   __proto__: plant,
+//   sayHi: rabbit.sayHi, // (*)
+// };
+// tree.sayHi(); // I'm an animal (?!?)
+
+// let animal = {
+//   eat: function () {
+//     // intentionally writing like this instead of eat() {...
+//     // ...
+//   },
+// };
+// let rabbit = {
+//   __proto__: animal,
+//   eat: function () {
+//     super.eat();
+//   },
+// };
+// rabbit.eat(); // Error calling super (because there's no [[HomeObject]])
+
+// let animal = {
+//   eat() {
+//     // intentionally writing like this instead of eat() {...
+//     // ...
+//     console.log("I'm an animal that is eating.");
+//   },
+// };
+// let rabbit = {
+//   __proto__: animal,
+//   eat() {
+//     super.eat();
+//   },
+// };
+// rabbit.eat(); // Error calling super (because there's no [[HomeObject]])
+
+// // mixin
+// let sayHiMixin = {
+//   sayHi() {
+//     console.log(`Hello ${this.name}`);
+//   },
+//   sayBye() {
+//     console.log(`Bye ${this.name}`);
+//   },
+// };
+// // usage:
+// class User {
+//   constructor(name) {
+//     this.name = name;
+//   }
+// }
+// // copy the methods
+// Object.assign(User.prototype, sayHiMixin);
+// // now User can say hi
+// const user = new User('Dude');
+// user.sayHi();
+
+// let sayMixin = {
+//   say(phrase) {
+//     console.log(phrase);
+//   },
+// };
+// let sayHiMixin = {
+//   __proto__: sayMixin, // (or we could use Object.setPrototypeOf to set the prototype here)
+
+//   sayHi() {
+//     // call parent method
+//     super.say(`Hello ${this.name}`); // (*)
+//   },
+//   sayBye() {
+//     super.say(`Bye ${this.name}`); // (*)
+//   },
+// };
+// let eatMixin = {
+//   eat() {
+//     console.log("I'm eating!");
+//   },
+// };
+// class User {
+//   constructor(name) {
+//     this.name = name;
+//   }
+// }
+// // copy the methods
+// Object.assign(User.prototype, sayHiMixin, eatMixin);
+// // now User can say hi
+// const user = new User('Dude'); // Hello Dude!
+// user.sayHi();
+
+// let eventMixin = {
+//   /**
+//    * Subscribe to event, usage:
+//    *  menu.on('select', function(item) { ... }
+//    */
+//   on(eventName, handler) {
+//     if (!this._eventHandlers) this._eventHandlers = {};
+//     if (!this._eventHandlers[eventName]) {
+//       this._eventHandlers[eventName] = [];
+//     }
+//     this._eventHandlers[eventName].push(handler);
+//   },
+//   /**
+//    * Cancel the subscription, usage:
+//    *  menu.off('select', handler)
+//    */
+//   off(eventName, handler) {
+//     let handlers = this._eventHandlers?.[eventName];
+//     if (!handlers) return;
+//     for (let i = 0; i < handlers.length; i++) {
+//       if (handlers[i] === handler) {
+//         handlers.splice(i--, 1);
+//       }
+//     }
+//   },
+//   /**
+//    * Generate an event with the given name and data
+//    *  this.trigger('select', data1, data2);
+//    */
+//   trigger(eventName, ...args) {
+//     if (!this._eventHandlers?.[eventName]) {
+//       return; // no handlers for that event name
+//     }
+
+//     // call the handlers
+//     this._eventHandlers[eventName].forEach((handler) =>
+//       // handler.apply(this, args)
+//       handler.apply(this, args)
+//     );
+//   },
+// };
+// // Make a class
+// class Menu {
+//   choose(value) {
+//     this.trigger('select', value);
+//   }
+// }
+// // Add the mixin with event-related methods
+// Object.assign(Menu.prototype, eventMixin);
+// let menu = new Menu();
+// // add a handler, to be called on selection:
+// // menu.on('select', (value) => console.log(`Value selected: ${value}`));
+// menu.on('select', function (value) {
+//   console.log(`Value selected: ${value}`);
+//   console.log(this);
+// });
+// // triggers the event => the handler above runs and shows:
+// // Value selected: 123
+// menu.choose('123');
+
+// class CoffeeMachine {
+//   waterAmount = 0; // the amount of water inside
+
+//   constructor(power) {
+//     this.power = power;
+//     console.log(`Created a coffee-machine, power: ${power}`);
+//   }
+// }
+// // create the coffee machine
+// let coffeeMachine = new CoffeeMachine(100);
+// // add water
+// coffeeMachine.waterAmount = 200;
+// console.log('end');
+
+// class CoffeeMachine {
+//   _waterAmount = 0;
+
+//   set waterAmount(value) {
+//     if (value < 0) {
+//       value = 0;
+//     }
+//     this._waterAmount = value;
+//   }
+
+//   get waterAmount() {
+//     return this._waterAmount;
+//   }
+
+//   constructor(power) {
+//     this._power = power;
+//   }
+// }
+// // create the coffee machine
+// let coffeeMachine = new CoffeeMachine(100);
+// // add water
+// coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+// console.log('end');
+// coffeeMachine._waterAmount;
+
+class CoffeeMachine {
+  #waterLimit = 200;
+
+  #fixWaterAmount(value) {
+    if (value < 0) return 0;
+    if (value > this.#waterLimit) return this.#waterLimit;
+  }
+
+  setWaterAmount(value) {
+    this.#waterLimit = this.#fixWaterAmount(value);
+  }
+}
+let coffeeMachine = new CoffeeMachine();
+// can't access privates from outside of the class
+coffeeMachine.#fixWaterAmount(123); // Error
+coffeeMachine.#waterLimit = 1000; // Error
