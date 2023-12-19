@@ -1328,27 +1328,60 @@
 // };
 // User.staticMethod(); // true
 
-class Article {
-  constructor(title, date) {
-    this.title = title;
-    this.date = date;
+// class Article {
+//   constructor(title, date) {
+//     this.title = title;
+//     this.date = date;
+//   }
+
+//   bye() {
+//     console.log('bye');
+//   }
+
+//   hello() {
+//     this.bye();
+//     return Article.createTodays();
+//   }
+
+//   static createTodays() {
+//     // remember, this = Article
+//     return new this("Today's digest", new Date());
+//   }
+// }
+// const article2 = new Article('a title', 'date');
+// let article = Article.createTodays();
+// console.log(article.title); // Today's digest
+// article.hello();
+
+// class Article {
+//   static publisher = 'Dylan Palmboom';
+// }
+// console.log(Article.publisher);
+
+class Animal {
+  static planet = 'Earth';
+
+  constructor(name, speed) {
+    this.speed = speed;
+    this.name = name;
   }
 
-  bye() {
-    console.log('bye');
+  run(speed = 0) {
+    this.speed += speed;
+    console.log(`${this.name} runs with speed ${this.speed}.`);
   }
 
-  hello() {
-    this.bye();
-    return Article.createTodays();
-  }
-
-  static createTodays() {
-    // remember, this = Article
-    return new this("Today's digest", new Date());
+  static compare(animalA, animalB) {
+    return animalA.speed - animalB.speed;
   }
 }
-const article2 = new Article('a title', 'date');
-let article = Article.createTodays();
-console.log(article.title); // Today's digest
-article.hello();
+// Inherit from Animal
+class Rabbit extends Animal {
+  hide() {
+    console.log(`${this.name} hides!`);
+  }
+}
+let rabbits = [new Rabbit('White Rabbit', 10), new Rabbit('Black Rabbit', 5)];
+rabbits.sort(Rabbit.compare);
+rabbits[0].run(); // Black Rabbit runs with speed 5.
+console.log(Rabbit.planet); // Earth
