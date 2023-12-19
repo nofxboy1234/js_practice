@@ -953,19 +953,94 @@
 // let animal = new Animal(); // animal
 // let rabbit = new Rabbit(); // animal
 
-class Animal {
-  showName() {  // instead of this.name = 'animal'
-    console.log('animal');
-  }
+// class Animal {
+//   showName() {
+//     // instead of this.name = 'animal'
+//     console.log('animal');
+//   }
 
-  constructor() {
-    this.showName(); // instead of console.log(this.name);
-  }
-}
-class Rabbit extends Animal {
-  showName() {
-    console.log('rabbit');
-  }
-}
-new Animal(); // animal
-new Rabbit(); // rabbit
+//   constructor() {
+//     this.showName(); // instead of console.log(this.name);
+//   }
+// }
+// class Rabbit extends Animal {
+//   showName() {
+//     console.log('rabbit');
+//   }
+// }
+// new Animal(); // animal
+// new Rabbit(); // rabbit
+
+// const hello = 'Hello';
+// function printHello() {
+//   console.log(hello);
+// }
+// printHello();
+// console.log(dylan);
+
+// const hello = 'Hello';
+// const printHello = function () {
+//   console.log(hello);
+// }
+// printHello();
+// console.log(dylan);
+
+// const hello = 'Hello';
+// const printHello = () => {
+//   let dylan = 'Dylan';
+//   console.log(hello);
+// };
+// printHello();
+// console.log(dylan);
+
+// class Animal {
+//   constructor(name) {
+//     this.speed = 0;
+//     this.name = name;
+//   }
+
+//   run(speed) {
+//     this.speed = speed;
+//     console.log(`${this.name} runs with speed ${this.speed}.`);
+//   }
+
+//   stop() {
+//     this.speed = 0;
+//     console.log(`${this.name} stands still.`);
+//   }
+// }
+// class Rabbit extends Animal {
+//   hide() {
+//     console.log(`${this.name} hides!`);
+//   }
+
+//   stop() {
+//     // super.stop(); // call parent stop
+//     // this.hide(); // and then hide
+
+//     // setTimeout(() => super.stop(), 1000);
+//     setTimeout(function () {
+//       super.stop();
+//     }, 1000);
+//   }
+// }
+// let rabbit = new Rabbit('White Rabbit');
+// rabbit.stop();
+
+let animal = {
+  name: 'Animal',
+  eat() {
+    console.log(`${this.name} eats.`);
+  },
+};
+
+let rabbit = {
+  __proto__: animal,
+  name: 'Rabbit',
+  eat() {
+    // that's how super.eat() could presumably work
+    this.__proto__.eat.call(this); // (*)
+  },
+};
+
+rabbit.eat(); // Rabbit eats.
