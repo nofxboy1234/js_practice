@@ -1611,6 +1611,8 @@ function createUser(name) {
   return Object.assign(user, { name }, { discordName });
 }
 function createPlayer(name, level) {
+  let player = Object.create({});
+
   const { discordName, sayName } = createUser(name);
 
   const increaseLevel = () => level++;
