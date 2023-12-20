@@ -1627,13 +1627,14 @@ function createUser(name) {
   return Object.assign(user, { name }, { discordName });
 }
 playerProto = {};
+Object.setPrototypeOf(playerProto, userProto);
 function createPlayer(name, level) {
   let player = Object.create(playerProto);
 
-  const { discordName, sayName } = createUser(name);
+  const { discordName } = createUser(name);
   const sayLevel = () => console.log(level);
 
-  Object.assign(Object.getPrototypeOf(player), { sayName }, { sayLevel });
+  Object.assign(Object.getPrototypeOf(player), { sayLevel });
   return Object.assign(player, { name }, { discordName });
 }
 // function createPlayer(name, level) {
