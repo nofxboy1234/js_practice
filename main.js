@@ -1569,6 +1569,8 @@
 // ************************************************
 
 class Cat {
+  home = 'bush';
+
   hello() {
     console.log('hello from cat');
   }
