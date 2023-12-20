@@ -1521,7 +1521,7 @@ function createMurderRobotDog(name) {
     speed: 100,
     position: 0,
   };
-  let dog = {};
+  let dog = { name };
   Object.assign(
     Object.getPrototypeOf(dog),
     barker(state),
