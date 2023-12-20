@@ -1402,23 +1402,72 @@
 // class Bar extends calculatorMixin(randomizerMixin(Foo)) {}
 // console.log('end');
 
-class ClassWithPrivate {
-  #privateField;
-  #privateFieldWithInitializer = 42;
+// class ClassWithPrivate {
+//   #privateField = 84;
+//   #privateFieldWithInitializer = 42;
 
-  #privateMethod() {
-    console.log('This is a private method');
-  }
+//   #privateMethod() {
+//     console.log('This is a private method');
+//   }
 
-  static #privateStaticField;
-  static #privateStaticFieldWithInitializer = 42;
+//   static #privateStaticField;
+//   static #privateStaticFieldWithInitializer = 42;
 
-  static #privateStaticMethod() {
-    console.log('This is a private static method');
-  }
+//   static #privateStaticMethod(obj) {
+//     console.log('This is a private static method');
+//     console.log(obj.#privateField);
+//   }
 
-  hello() {
-    console.log(this.#privateFieldWithInitializer);
-  }
-}
-const instanceOfClassWithPrivate = new ClassWithPrivate();
+//   hello() {
+//     console.log(this.#privateFieldWithInitializer);
+//     ClassWithPrivate.#privateStaticField;
+//     ClassWithPrivate.#privateStaticMethod(this);
+//   }
+// }
+// const instanceOfClassWithPrivate = new ClassWithPrivate();
+// instanceOfClassWithPrivate.hello()
+
+// class ClassWithPrivateField {
+//   #privateField;
+
+//   constructor() {
+//     this.#privateField = 42;
+//   }
+// }
+// class Subclass extends ClassWithPrivateField {
+//   #subPrivateField;
+
+//   constructor() {
+//     super();
+//     this.#subPrivateField = 23;
+//   }
+
+//   tryAccessBaseClassPrivate() {
+//     // this.#privateField;
+//     this.#subPrivateField;
+//   }
+// }
+// const sub = new Subclass(); // In some dev tools, it shows Subclass {#privateField: 42, #subPrivateField: 23}
+
+// class Stamper extends class {
+//   // A base class whose constructor returns the object it's given
+//   constructor(obj) {
+//     return obj;
+//   }
+// } {
+//   // This declaration will "stamp" the private field onto the object
+//   // returned by the base class constructor
+//   #stamp = 42;
+//   static getStamp(obj) {
+//     return obj.#stamp;
+//   }
+// }
+// const obj = {};
+// new Stamper(obj);
+// // `Stamper` calls `Base`, which returns `obj`, so `obj` is
+// // now the `this` value. `Stamper` then defines `#stamp` on `obj`
+// console.log(obj); // In some dev tools, it shows {#stamp: 42}
+// console.log(Stamper.getStamp(obj)); // 42
+// console.log(obj instanceof Stamper); // false
+// // You cannot stamp private properties twice
+// // new Stamper(obj); // Error: Initializing an object twice is an error with private fields
