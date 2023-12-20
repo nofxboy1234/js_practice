@@ -1600,11 +1600,21 @@ User.prototype.sayName = function () {
   console.log(this.name);
 };
 function createUser(name) {
+  let user = Object.create({});
+
   const discordName = '@' + name;
   const sayName = () => {
     console.log(name);
   };
-  return { name, discordName, sayName };
+  // return { name, discordName, sayName };
+  Object.assign(Object.getPrototypeOf(user), { sayName });
+  return Object.assign(user, { name }, { discordName });
 }
 const user1 = new User('Dylan');
+console.log(user1.name);
+console.log(user1.discordName);
+user1.sayName();
 const user2 = createUser('Dylan');
+console.log(user2.name);
+console.log(user2.discordName);
+user2.sayName();
