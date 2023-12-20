@@ -1528,6 +1528,12 @@ function createMurderRobotDog(name) {
     driver(state),
     killer(state)
   );
+  // Object.assign(
+  //   dog,
+  //   barker(state),
+  //   driver(state),
+  //   killer(state)
+  // );
   return dog;
 }
 const murderRobotDog = (name) => {
