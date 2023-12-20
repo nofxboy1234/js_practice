@@ -1589,22 +1589,112 @@
 // const newPlayer = new Player('dylan', 'X');
 // ************************************************
 
-const User = function (name) {
-  this.name = name;
-  this.discordName = '@' + name;
-  // this.sayName = function () {
-  //   console.log(this.name);
-  // };
-};
-User.prototype.sayName = function () {
-  console.log(this.name);
-};
+// const User = function (name) {
+//   this.name = name;
+//   this.discordName = '@' + name;
+//   // this.sayName = function () {
+//   //   console.log(this.name);
+//   // };
+// };
+// User.prototype.sayName = function () {
+//   console.log(this.name);
+// };
+// function createUser(name) {
+//   const discordName = '@' + name;
+//   const sayName = () => {
+//     console.log(name);
+//   };
+//   return { name, discordName, sayName };
+// }
+// function createUser(name) {
+//   const discordName = '@' + name;
+//   const sayName = () => {
+//     console.log(name);
+//   };
+//   return { name, discordName, sayName };
+// }
+// const user1 = new User('Dylan');
+// user1.sayName();
+// const user2 = createUser('Pluto');
+// user2.sayName();
+// user1.sayName();
+
 function createUser(name) {
   const discordName = '@' + name;
-  const sayName = () => {
-    console.log(name);
-  };
-  return { name, discordName, sayName };
+
+  let reputation = 0;
+  const getReputation = () => reputation;
+  const giveReputation = () => reputation++;
+
+  return { name, discordName, getReputation, giveReputation };
 }
-const user1 = new User('Dylan');
-const user2 = createUser('Dylan');
+function createPlayer(name, level) {
+  const { discordName, getReputation } = createUser(name);
+
+  const increaseLevel = () => level++;
+  const getLevel = () => level;
+  return { name, discordName, getReputation, increaseLevel, getLevel };
+}
+function createPlayerUsingAssign(name, level) {
+  const user = createUser(name);
+
+  const increaseLevel = () => level++;
+  const getLevel = () => level;
+  return Object.assign({}, user, { increaseLevel, getLevel });
+}
+
+user1 = createUser('Dylan');
+console.log(user1.name);
+console.log(user1.discordName);
+console.log(user1.getReputation());
+user1.giveReputation();
+console.log(user1.getReputation());
+
+user2 = createUser('Pluto');
+console.log(user2.name);
+console.log(user2.discordName);
+console.log(user2.getReputation());
+user2.giveReputation();
+user2.giveReputation();
+console.log(user2.getReputation());
+
+user1 = createUser('Dylan');
+console.log(user1.name);
+console.log(user1.discordName);
+console.log(user1.getReputation());
+user1.giveReputation();
+console.log(user1.getReputation());
+
+player1 = createPlayer('Player1', 1);
+console.log(player1.name);
+console.log(player1.discordName);
+console.log(player1.getReputation());
+console.log(player1.getLevel());
+player1.increaseLevel();
+console.log(player1.getLevel());
+
+player2 = createPlayer('Player2', 2);
+console.log(player2.name);
+console.log(player2.discordName);
+console.log(player2.getReputation());
+console.log(player2.getLevel());
+player2.increaseLevel();
+console.log(player2.getLevel());
+
+player1 = createPlayer('Player1', 1);
+console.log(player1.name);
+console.log(player1.discordName);
+console.log(player1.getReputation());
+console.log(player1.getLevel());
+player1.increaseLevel();
+console.log(player1.getLevel());
+
+player3 = createPlayerUsingAssign('Player3', 1);
+console.log(player3.name);
+console.log(player3.discordName);
+console.log(player3.getReputation());
+player3.giveReputation();
+console.log(player3.getReputation());
+console.log(player3.getLevel());
+player3.increaseLevel();
+console.log(player3.getLevel());
