@@ -1577,6 +1577,10 @@ class Kitten extends Cat {
   // hello() {
   //   console.log('hello from kitten');
   // }
+  constructor() {
+    super();
+    this.lives = 9;
+  }
 
   bye() {
     console.log('bye from kitten');
@@ -1584,9 +1588,9 @@ class Kitten extends Cat {
 }
 const cat = new Cat();
 cat.hello();
-const kitten = new Kitten();
-kitten.hello();
-
+const kitten1 = new Kitten();
+const kitten2 = new Kitten();
+console.log(Object.getPrototypeOf(kitten1) === Object.getPrototypeOf(kitten2));
 // function Player(name, marker) {
 //   this.name = name;
 //   this.marker = marker;
@@ -1645,5 +1649,7 @@ function createPlayer(name, level) {
 // console.log(user2.discordName);
 // user2.sayName();
 
-// const player1 = createPlayer('Dylan', 19);
-// const player2 = createPlayer('Zoey', 10);
+const user1 = createUser('Dylan');
+const user2 = createUser('Dylan');
+console.log(Object.getPrototypeOf(user1) === Object.getPrototypeOf(user2));
+const player = createPlayer('Dylan', 19);
