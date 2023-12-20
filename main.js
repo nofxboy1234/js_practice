@@ -1615,34 +1615,42 @@ User.prototype.sayName = function () {
   console.log(this.name);
 };
 
-protoObject = {};
+userProto = {};
 function createUser(name) {
-  // let user = Object.create({});
-  let user = Object.create(protoObject);
+  let user = Object.create(userProto);
 
   const discordName = '@' + name;
   const sayName = () => {
     console.log(name);
   };
-  // return { name, discordName, sayName };
   Object.assign(Object.getPrototypeOf(user), { sayName });
   return Object.assign(user, { name }, { discordName });
 }
+playerProto = {};
 function createPlayer(name, level) {
+  let player = Object.create(playerProto);
+
   const { discordName, sayName } = createUser(name);
+  const sayLevel = () => console.log(level);
 
-  const increaseLevel = () => level++;
-  const getLevel = () => level;
-
-  return Object.assign(
-    {},
-    { name },
-    { discordName },
-    { sayName },
-    { increaseLevel },
-    { getLevel }
-  );
+  Object.assign(Object.getPrototypeOf(player), { sayName }, { sayLevel });
+  return Object.assign(player, { name }, { discordName });
 }
+// function createPlayer(name, level) {
+//   const { discordName, sayName } = createUser(name);
+
+//   const increaseLevel = () => level++;
+//   const getLevel = () => level;
+
+//   return Object.assign(
+//     {},
+//     { name },
+//     { discordName },
+//     { sayName },
+//     { increaseLevel },
+//     { getLevel }
+//   );
+// }
 // const user1 = new User('Dylan');
 // console.log(user1.name);
 // console.log(user1.discordName);
@@ -1652,7 +1660,12 @@ function createPlayer(name, level) {
 // console.log(user2.discordName);
 // user2.sayName();
 
+// const user1 = createUser('Dylan');
+// const user2 = createUser('Zoey');
+// console.log(Object.getPrototypeOf(user1) === Object.getPrototypeOf(user2));
+// const player = createPlayer('Dylan', 19);
+
 const user1 = createUser('Dylan');
-const user2 = createUser('Zoey');
-console.log(Object.getPrototypeOf(user1) === Object.getPrototypeOf(user2));
-const player = createPlayer('Dylan', 19);
+const player1 = createPlayer('Dylan', 19);
+const player2 = createPlayer('Zoey', 22);
+console.log(Object.getPrototypeOf(player1) === Object.getPrototypeOf(player2));
