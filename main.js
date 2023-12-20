@@ -1610,6 +1610,12 @@ function createUser(name) {
   Object.assign(Object.getPrototypeOf(user), { sayName });
   return Object.assign(user, { name }, { discordName });
 }
+function createPlayer(name, level) {
+  const { discordName, sayName } = createUser(name);
+
+  const increaseLevel = () => level++;
+  return { name, discordName, sayName, increaseLevel };
+}
 const user1 = new User('Dylan');
 console.log(user1.name);
 console.log(user1.discordName);
@@ -1618,3 +1624,5 @@ const user2 = createUser('Dylan');
 console.log(user2.name);
 console.log(user2.discordName);
 user2.sayName();
+
+const player = createPlayer('Dylan', 19);
