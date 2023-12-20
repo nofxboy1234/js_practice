@@ -1515,6 +1515,21 @@ const killer = (state) => ({
 // const robot = driver({ position: 1, speed: 2 });
 // console.log(robot.drive());
 
+function createMurderRobotDog(name) {
+  state = {
+    name,
+    speed: 100,
+    position: 0,
+  };
+  let dog = {};
+  Object.assign(
+    Object.getPrototypeOf(dog),
+    barker(state),
+    driver(state),
+    killer(state)
+  );
+  return dog;
+}
 const murderRobotDog = (name) => {
   let state = {
     name,
@@ -1523,4 +1538,5 @@ const murderRobotDog = (name) => {
   };
   return Object.assign({}, barker(state), driver(state), killer(state));
 };
-murderRobotDog('sniffles').bark()
+murderRobotDog('sniffles').bark();
+const murderRobotoDog2 = createMurderRobotDog('sniffles');
