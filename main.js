@@ -1614,8 +1614,11 @@ const User = function (name) {
 User.prototype.sayName = function () {
   console.log(this.name);
 };
+
+protoObject = {};
 function createUser(name) {
-  let user = Object.create({});
+  // let user = Object.create({});
+  let user = Object.create(protoObject);
 
   const discordName = '@' + name;
   const sayName = () => {
@@ -1650,6 +1653,6 @@ function createPlayer(name, level) {
 // user2.sayName();
 
 const user1 = createUser('Dylan');
-const user2 = createUser('Dylan');
+const user2 = createUser('Zoey');
 console.log(Object.getPrototypeOf(user1) === Object.getPrototypeOf(user2));
 const player = createPlayer('Dylan', 19);
