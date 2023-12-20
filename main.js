@@ -1568,13 +1568,24 @@
 // const player = createPlayer('dylan', 19);
 // ************************************************
 
-// class Cat {
-//   hello() {
-//     console.log('hello from cat');
-//   }
-// }
-// const cat = new Cat();
-// cat.hello();
+class Cat {
+  hello() {
+    console.log('hello from cat');
+  }
+}
+class Kitten extends Cat {
+  // hello() {
+  //   console.log('hello from kitten');
+  // }
+
+  bye() {
+    console.log('bye from kitten');
+  }
+}
+const cat = new Cat();
+cat.hello();
+const kitten = new Kitten();
+kitten.hello();
 
 // function Player(name, marker) {
 //   this.name = name;
@@ -1625,14 +1636,14 @@ function createPlayer(name, level) {
     { getLevel }
   );
 }
-const user1 = new User('Dylan');
-console.log(user1.name);
-console.log(user1.discordName);
-user1.sayName();
-const user2 = createUser('Dylan');
-console.log(user2.name);
-console.log(user2.discordName);
-user2.sayName();
+// const user1 = new User('Dylan');
+// console.log(user1.name);
+// console.log(user1.discordName);
+// user1.sayName();
+// const user2 = createUser('Dylan');
+// console.log(user2.name);
+// console.log(user2.discordName);
+// user2.sayName();
 
-const player1 = createPlayer('Dylan', 19);
-const player2 = createPlayer('Zoey', 10);
+// const player1 = createPlayer('Dylan', 19);
+// const player2 = createPlayer('Zoey', 10);
