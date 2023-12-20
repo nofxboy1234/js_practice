@@ -1496,53 +1496,115 @@
 // const user = createUser('dylan');
 // const player = createPlayer('dylan', 19);
 
-const barker = (state) => ({
-  bark: () => console.log('Woof, I am ' + state.name),
-});
-// const driver = (state) => {
-//   return {
-//     drive: () => (state.position = state.position + state.speed),
-//   };
-// };
-const driver = (state) => ({
-  drive: () => (state.position = state.position + state.speed),
-});
-const killer = (state) => ({
-  kill: () => console.log('killing!'),
-});
-// const dog = barker({ name: 'karo' });
-// dog.bark();
-// const robot = driver({ position: 1, speed: 2 });
-// console.log(robot.drive());
+// // ************************************************
+// const barker = (state) => ({
+//   bark: () => console.log('Woof, I am ' + state.name),
+// });
+// // const driver = (state) => {
+// //   return {
+// //     drive: () => (state.position = state.position + state.speed),
+// //   };
+// // };
+// const driver = (state) => ({
+//   drive: () => (state.position = state.position + state.speed),
+// });
+// const killer = (state) => ({
+//   kill: () => console.log('killing!'),
+// });
+// // const dog = barker({ name: 'karo' });
+// // dog.bark();
+// // const robot = driver({ position: 1, speed: 2 });
+// // console.log(robot.drive());
 
-function createMurderRobotDog(name) {
-  state = {
-    name,
-    speed: 100,
-    position: 0,
-  };
-  let dog = { name };
-  Object.assign(
-    Object.getPrototypeOf(dog),
-    barker(state),
-    driver(state),
-    killer(state)
-  );
-  // Object.assign(
-  //   dog,
-  //   barker(state),
-  //   driver(state),
-  //   killer(state)
-  // );
-  return dog;
-}
-const murderRobotDog = (name) => {
-  let state = {
-    name,
-    speed: 100,
-    position: 0,
-  };
-  return Object.assign({}, barker(state), driver(state), killer(state));
+// function createMurderRobotDog(name) {
+//   state = {
+//     name,
+//     speed: 100,
+//     position: 0,
+//   };
+//   let dog = { name };
+//   Object.assign(
+//     Object.getPrototypeOf(dog),
+//     barker(state),
+//     driver(state),
+//     killer(state)
+//   );
+//   // Object.assign(
+//     //   dog,
+//     //   barker(state),
+//     //   driver(state),
+//     //   killer(state)
+//     // );
+//     return dog;
+//   }
+// // const murderRobotDog = (name) => {
+// //   let state = {
+// //     name,
+// //     speed: 100,
+// //     position: 0,
+// //   };
+// //   return Object.assign({}, barker(state), driver(state), killer(state));
+// // };
+// // murderRobotDog('sniffles').bark();
+// const murderRobotoDog2 = createMurderRobotDog('sniffles');
+// ************************************************
+
+// function createUser(name) {
+//   const discordName = '@' + name;
+
+//   let reputation = 0;
+//   const getReputation = () => reputation;
+//   const giveReputation = () => reputation++;
+
+//   return { name, discordName, getReputation, giveReputation };
+// }
+// function createPlayer(name, level) {
+//   const { discordName, getReputation } = createUser(name);
+
+//   const increaseLevel = () => level++;
+//   return { name, discordName, getReputation, increaseLevel };
+// }
+// const user = createUser('dylan');
+// const player = createPlayer('dylan', 19);
+// ************************************************
+
+// class Cat {
+//   hello() {
+//     console.log('hello from cat');
+//   }
+// }
+// const cat = new Cat();
+// cat.hello();
+
+// function Player(name, marker) {
+//   this.name = name;
+//   this.marker = marker;
+//   this.sayName = function () {
+//     console.log(this.name);
+//   };
+// }
+// Player.prototype.sayHello = function () {
+//   console.log("Hello, I'm a player!");
+// };
+// const newPlayer = new Player('dylan', 'X');
+// ************************************************
+
+const User = function (name) {
+  this.name = name;
+  this.discordName = '@' + name;
+  // this.sayName = function () {
+  //   console.log(this.name);
+  // };
 };
-murderRobotDog('sniffles').bark();
-const murderRobotoDog2 = createMurderRobotDog('sniffles');
+User.prototype.sayName = function () {
+  console.log(this.name);
+};
+function createUser(name) {
+  const discordName = '@' + name;
+  const sayName = () => {
+    console.log(name);
+  };
+  return { name, discordName, sayName };
+}
+const user1 = new User('Dylan');
+const user2 = createUser('Dylan');
