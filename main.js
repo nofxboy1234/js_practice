@@ -1581,6 +1581,7 @@ class Kitten extends Cat {
   // }
   constructor() {
     super();
+    this.home = 'beach';
     this.lives = 9;
   }
 
@@ -1589,10 +1590,15 @@ class Kitten extends Cat {
   }
 }
 const cat = new Cat();
-cat.hello();
+// cat.hello();
+console.log(cat.home)
 const kitten1 = new Kitten();
-const kitten2 = new Kitten();
-console.log(Object.getPrototypeOf(kitten1) === Object.getPrototypeOf(kitten2));
+console.log(kitten1.home)
+console.log(cat.home)
+
+
+// const kitten2 = new Kitten();
+// console.log(Object.getPrototypeOf(kitten1) === Object.getPrototypeOf(kitten2));
 // function Player(name, marker) {
 //   this.name = name;
 //   this.marker = marker;
@@ -1668,7 +1674,10 @@ function createPlayer(name, level) {
 // console.log(Object.getPrototypeOf(user1) === Object.getPrototypeOf(user2));
 // const player = createPlayer('Dylan', 19);
 
-const user1 = createUser('Dylan');
-const player1 = createPlayer('Dylan', 19);
-const player2 = createPlayer('Zoey', 22);
-console.log(Object.getPrototypeOf(player1) === Object.getPrototypeOf(player2));
+const user1 = createUser('Peter');
+user1.sayName();
+const player1 = createPlayer('Jane', 19);
+user1.sayName();
+
+// const player2 = createPlayer('Zoey', 22);
+// console.log(Object.getPrototypeOf(player1) === Object.getPrototypeOf(player2));
