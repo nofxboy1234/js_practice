@@ -1471,3 +1471,43 @@
 // console.log(obj instanceof Stamper); // false
 // // You cannot stamp private properties twice
 // // new Stamper(obj); // Error: Initializing an object twice is an error with private fields
+
+// function createUser(name) {
+//   const discordName = '@' + name;
+
+//   let reputation = 0;
+//   const getReputation = () => reputation;
+//   const giveReputation = () => reputation++;
+
+//   return { name, discordName, getReputation, giveReputation };
+// }
+// // function createPlayer(name, level) {
+// //   const { discordName, getReputation } = createUser(name);
+
+// //   const increaseLevel = () => level++;
+// //   return { name, discordName, getReputation, increaseLevel };
+// // }
+// function createPlayer (name, level) {
+//   const user = createUser(name);
+
+//   const increaseLevel = () => level++;
+//   return Object.assign({}, user, { increaseLevel });
+// }
+// const user = createUser('dylan');
+// const player = createPlayer('dylan', 19);
+
+const barker = (state) => ({
+  bark: () => console.log('Woof, I am ' + state.name),
+});
+// const driver = (state) => {
+//   return {
+//     drive: () => (state.position = state.position + state.speed),
+//   };
+// };
+const driver = (state) => ({
+  drive: () => (state.position = state.position + state.speed),
+});
+const dog = barker({ name: 'karo' });
+dog.bark();
+const robot = driver({ position: 1, speed: 2 });
+console.log(robot.drive());
