@@ -1507,7 +1507,20 @@ const barker = (state) => ({
 const driver = (state) => ({
   drive: () => (state.position = state.position + state.speed),
 });
-const dog = barker({ name: 'karo' });
-dog.bark();
-const robot = driver({ position: 1, speed: 2 });
-console.log(robot.drive());
+const killer = (state) => ({
+  kill: () => console.log('killing!'),
+});
+// const dog = barker({ name: 'karo' });
+// dog.bark();
+// const robot = driver({ position: 1, speed: 2 });
+// console.log(robot.drive());
+
+const murderRobotDog = (name) => {
+  let state = {
+    name,
+    speed: 100,
+    position: 0,
+  };
+  return Object.assign({}, barker(state), driver(state), killer(state));
+};
+murderRobotDog('sniffles').bark()
