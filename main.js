@@ -1751,6 +1751,48 @@ User.prototype.getReputation = function () {
 User.prototype.giveReputation = function () {
   this.reputation++;
 };
+class UserClass {
+  #privateVar = 'private!';
+  _protectedVar = 'protected!'
+  constructor(name) {
+    // let privateVar = 'private!';
+    this.name = name;
+    this.discordName = '@' + name;
+
+    this.reputation = 0;
+    // this.getReputation = function () {
+    //   return reputation;
+    // };
+    // this.giveReputation = function () {
+    //   this.reputation++;
+    // };
+  }
+  getPrivateVar = function () {
+    return this.#privateVar;
+  };
+  setPrivateVar = function (value) {
+    this.#privateVar = value;
+  };
+
+  getReputation() {
+    return this.reputation;
+  }
+  giveReputation() {
+    this.reputation++;
+  }
+}
+class PlayerClass extends UserClass {
+  // getPrivateVarFromParent() {
+  //   return this.#privateVar;
+  // }
+
+  getProtectedVarFromParent() {
+    return this._protectedVar;
+  }
+}
+const userFromClass = new UserClass('user from class');
+const playerFromClass = new PlayerClass('player from class');
+
 const Player = function (name, marker) {
   this.name = name;
   this.reputation = 0;
