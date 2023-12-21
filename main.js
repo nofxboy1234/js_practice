@@ -1730,6 +1730,7 @@ function createPlayerUsingAssign(name, level) {
 
 // *********************************************
 const User = function (name) {
+  let privateVar = 'private!'
   this.name = name;
   this.discordName = '@' + name;
 
@@ -1740,13 +1741,16 @@ const User = function (name) {
   // this.giveReputation = function () {
   //   this.reputation++;
   // };
+  this.getPrivateVar = function () {
+    return privateVar;
+  };
 };
-User.prototype.getReputation = function() {
+User.prototype.getReputation = function () {
   return this.reputation;
-}
-User.prototype.giveReputation = function() {
+};
+User.prototype.giveReputation = function () {
   this.reputation++;
-}
+};
 const Player = function (name, marker) {
   this.name = name;
   this.reputation = 0;
@@ -1858,4 +1862,3 @@ const player2 = new Player('also steve', 'O');
 console.log(player1.getReputation());
 player1.giveReputation();
 console.log(player1.getReputation());
-
