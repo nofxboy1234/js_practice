@@ -1619,82 +1619,243 @@
 // user2.sayName();
 // user1.sayName();
 
+// function createUser(name) {
+//   const discordName = '@' + name;
+
+//   let reputation = 0;
+//   const getReputation = () => reputation;
+//   const giveReputation = () => reputation++;
+
+//   return { name, discordName, getReputation, giveReputation };
+// }
+// function createPlayer(name, level) {
+//   const { discordName, getReputation } = createUser(name);
+
+//   const increaseLevel = () => level++;
+//   const getLevel = () => level;
+//   return { name, discordName, getReputation, increaseLevel, getLevel };
+// }
+// function createPlayerUsingAssign(name, level) {
+//   const user = createUser(name);
+
+//   const increaseLevel = () => level++;
+//   const getLevel = () => level;
+//   return Object.assign({}, user, { increaseLevel, getLevel });
+// }
+
+// user1 = createUser('Dylan');
+// console.log(user1.name);
+// console.log(user1.discordName);
+// console.log(user1.getReputation());
+// user1.giveReputation();
+// console.log(user1.getReputation());
+
+// user2 = createUser('Pluto');
+// console.log(user2.name);
+// console.log(user2.discordName);
+// console.log(user2.getReputation());
+// user2.giveReputation();
+// user2.giveReputation();
+// console.log(user2.getReputation());
+
+// user1 = createUser('Dylan');
+// console.log(user1.name);
+// console.log(user1.discordName);
+// console.log(user1.getReputation());
+// user1.giveReputation();
+// console.log(user1.getReputation());
+
+// player1 = createPlayer('Player1', 1);
+// console.log(player1.name);
+// console.log(player1.discordName);
+// console.log(player1.getReputation());
+// console.log(player1.getLevel());
+// player1.increaseLevel();
+// console.log(player1.getLevel());
+
+// player2 = createPlayer('Player2', 2);
+// console.log(player2.name);
+// console.log(player2.discordName);
+// console.log(player2.getReputation());
+// console.log(player2.getLevel());
+// player2.increaseLevel();
+// console.log(player2.getLevel());
+
+// player1 = createPlayer('Player1', 1);
+// console.log(player1.name);
+// console.log(player1.discordName);
+// console.log(player1.getReputation());
+// console.log(player1.getLevel());
+// player1.increaseLevel();
+// console.log(player1.getLevel());
+
+// player3 = createPlayerUsingAssign('Player3', 1);
+// console.log(player3.name);
+// console.log(player3.discordName);
+// console.log(player3.getReputation());
+// player3.giveReputation();
+// console.log(player3.getReputation());
+// console.log(player3.getLevel());
+// player3.increaseLevel();
+// console.log(player3.getLevel());
+
+// *********************************************
 function createUser(name) {
   const discordName = '@' + name;
 
   let reputation = 0;
-  const getReputation = () => reputation;
+  const getReputation = () => {
+    // console.log(discordName);
+    return reputation;
+  };
   const giveReputation = () => reputation++;
 
-  return { name, discordName, getReputation, giveReputation };
+  return { name, getReputation, giveReputation };
 }
 function createPlayer(name, level) {
-  const { discordName, getReputation } = createUser(name);
+  const { getReputation } = createUser(name);
 
   const increaseLevel = () => level++;
   const getLevel = () => level;
-  return { name, discordName, getReputation, increaseLevel, getLevel };
+  return { name, getReputation, increaseLevel, getLevel };
 }
 function createPlayerUsingAssign(name, level) {
   const user = createUser(name);
 
   const increaseLevel = () => level++;
   const getLevel = () => level;
-  return Object.assign({}, user, { increaseLevel, getLevel });
+
+  return Object.assign({}, user, { increaseLevel }, { getLevel }, { level });
 }
 
-user1 = createUser('Dylan');
-console.log(user1.name);
-console.log(user1.discordName);
-console.log(user1.getReputation());
-user1.giveReputation();
-console.log(user1.getReputation());
+// *********************************************
+const User = function (name) {
+  this.name = name;
+  this.discordName = '@' + name;
 
-user2 = createUser('Pluto');
-console.log(user2.name);
-console.log(user2.discordName);
-console.log(user2.getReputation());
-user2.giveReputation();
-user2.giveReputation();
-console.log(user2.getReputation());
+  this.reputation = 0;
+  // this.getReputation = function () {
+  //   return reputation;
+  // };
+  // this.giveReputation = function () {
+  //   this.reputation++;
+  // };
+};
+User.prototype.getReputation = function() {
+  return this.reputation;
+}
+User.prototype.giveReputation = function() {
+  this.reputation++;
+}
+const Player = function (name, marker) {
+  this.name = name;
+  this.reputation = 0;
+  this.marker = marker;
+};
+Object.setPrototypeOf(Player.prototype, User.prototype);
+Player.prototype.getMarker = function () {
+  console.log(`My marker is '${this.marker}'`);
+};
 
-user1 = createUser('Dylan');
-console.log(user1.name);
-console.log(user1.discordName);
-console.log(user1.getReputation());
-user1.giveReputation();
-console.log(user1.getReputation());
+// *********************************************
+const factoryUser1 = createUser('factory user 1');
+console.log(factoryUser1.name);
+console.log(factoryUser1.discordName);
+console.log(factoryUser1.getReputation());
+factoryUser1.giveReputation();
+console.log(factoryUser1.getReputation());
+console.log(factoryUser1.reputation);
 
-player1 = createPlayer('Player1', 1);
-console.log(player1.name);
-console.log(player1.discordName);
+console.log('\n');
+
+const factoryUser2 = createUser('factory user 2');
+console.log(factoryUser2.name);
+console.log(factoryUser2.discordName);
+console.log(factoryUser2.getReputation());
+factoryUser2.giveReputation();
+factoryUser2.giveReputation();
+console.log(factoryUser2.getReputation());
+
+console.log('\n');
+
+console.log(factoryUser1.name);
+console.log(factoryUser1.discordName);
+console.log(factoryUser1.getReputation());
+// *********************************************
+console.log('\n');
+
+const constructorUser1 = new User('constructor user 1');
+console.log(constructorUser1.name);
+console.log(constructorUser1.discordName);
+console.log(constructorUser1.getReputation());
+constructorUser1.giveReputation();
+console.log(constructorUser1.getReputation());
+console.log(constructorUser1.reputation);
+
+console.log('\n');
+
+const constructorUser2 = new User('constructor user 2');
+console.log(constructorUser2.name);
+console.log(constructorUser2.discordName);
+console.log(constructorUser2.getReputation());
+constructorUser2.giveReputation();
+constructorUser2.giveReputation();
+console.log(constructorUser2.getReputation());
+console.log(constructorUser2.reputation);
+
+console.log('\n');
+
+console.log(constructorUser1.name);
+console.log(constructorUser1.discordName);
+console.log(constructorUser1.getReputation());
+console.log(constructorUser1.reputation);
+// *********************************************
+console.log('\n');
+
+// return { name, discordName, getReputation, increaseLevel };
+
+const factoryPlayer1 = createPlayer('factory player 1', 1);
+console.log(factoryPlayer1.name);
+console.log(factoryPlayer1.discordName);
+console.log(factoryPlayer1.getReputation());
+// factoryPlayer1.giveReputation();
+// console.log(factoryPlayer1.reputation);
+console.log(factoryPlayer1.getLevel());
+factoryPlayer1.increaseLevel();
+console.log(factoryPlayer1.getLevel());
+// console.log(factoryPlayer1.level);
+factoryPlayer1.name = 'factory player 1 edited';
+console.log(factoryPlayer1.name);
+
+console.log('\n');
+
+console.log(constructorUser2.name);
+console.log(constructorUser2.discordName);
+console.log(constructorUser2.getReputation());
+console.log(constructorUser2.reputation);
+
+console.log('\n');
+
+const factoryPlayerUsingAssign1 = createPlayerUsingAssign(
+  'factory player using assign 1',
+  3
+);
+console.log(factoryPlayerUsingAssign1.name);
+console.log(factoryPlayerUsingAssign1.discordName);
+console.log(factoryPlayerUsingAssign1.getReputation());
+factoryPlayerUsingAssign1.giveReputation();
+console.log(factoryPlayerUsingAssign1.getReputation());
+
+// console.log(factoryPlayerUsingAssign1.reputation);
+factoryPlayerUsingAssign1.increaseLevel();
+console.log(factoryPlayerUsingAssign1.getLevel());
+console.log(factoryPlayerUsingAssign1.level);
+factoryPlayerUsingAssign1.name = 'factory player 1 edited';
+console.log(factoryPlayerUsingAssign1.name);
+// *********************************************
+const player1 = new Player('steve', 'X');
+const player2 = new Player('also steve', 'O');
 console.log(player1.getReputation());
-console.log(player1.getLevel());
-player1.increaseLevel();
-console.log(player1.getLevel());
-
-player2 = createPlayer('Player2', 2);
-console.log(player2.name);
-console.log(player2.discordName);
-console.log(player2.getReputation());
-console.log(player2.getLevel());
-player2.increaseLevel();
-console.log(player2.getLevel());
-
-player1 = createPlayer('Player1', 1);
-console.log(player1.name);
-console.log(player1.discordName);
+player1.giveReputation();
 console.log(player1.getReputation());
-console.log(player1.getLevel());
-player1.increaseLevel();
-console.log(player1.getLevel());
 
-player3 = createPlayerUsingAssign('Player3', 1);
-console.log(player3.name);
-console.log(player3.discordName);
-console.log(player3.getReputation());
-player3.giveReputation();
-console.log(player3.getReputation());
-console.log(player3.getLevel());
-player3.increaseLevel();
-console.log(player3.getLevel());
