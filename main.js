@@ -1730,7 +1730,7 @@ function createPlayerUsingAssign(name, level) {
 
 // *********************************************
 const User = function (name) {
-  let privateVar = 'private!'
+  let privateVar = 'private!';
   this.name = name;
   this.discordName = '@' + name;
 
@@ -1862,3 +1862,23 @@ const player2 = new Player('also steve', 'O');
 console.log(player1.getReputation());
 player1.giveReputation();
 console.log(player1.getReputation());
+
+console.log('\n');
+
+function func(args) {
+  var element = args;
+
+  this.getElement = function () {
+    return element;
+  };
+  this.setElement = function (input) {
+    element = input;
+  };
+}
+var a = new func(15);
+var b = a.getElement();
+console.log(b);
+a.setElement(5);
+console.log(a.getElement());
+var c = a.element;
+console.log(c);
